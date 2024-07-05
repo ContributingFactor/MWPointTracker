@@ -3,16 +3,16 @@ let trackedUploads = [];
 
 
 const observer = new MutationObserver(() => {
-  // if we find the nprogress div, it means the content is changing
-  // and we need to clear our tracked downloads cache.
-  if (document.querySelector('div#nprogress')){
-	  trackedUploads = [];
-	  return;
-  }
-  list = document.querySelector('div.pageContent.MuiBox-root.portal-css-0');
-  if (list) {
-	  countDownloads();
-  }
+    // if we find the nprogress div, it means the content is changing
+    // and we need to clear our tracked downloads cache.
+    if (document.querySelector('div#nprogress')) {
+        trackedUploads = [];
+        return;
+    }
+    list = document.querySelector('div.pageContent.MuiBox-root.portal-css-0');
+    if (list) {
+        countDownloads();
+    }
 });
 
 const target = document.querySelector('body');
@@ -44,7 +44,7 @@ function strToNumber(inVal) {
 
 // Return the siblings of an element
 function getSiblings(elem) {
-	return Array.from(elem.parentNode.childNodes).filter((s) => s !== elem);
+    return Array.from(elem.parentNode.childNodes).filter((s) => s !== elem);
 }
 
 // Map the total to MakerWorld's point system.
@@ -52,24 +52,24 @@ function getSiblings(elem) {
 // make the text red. If we are 2 points away, make the
 // text orange.
 function getTotalValueColor(total) {
-	let textColor = '';
-	if (total <= 50) {
-		mod = 10;
-	} else if (total <= 500) {
-		mod = 25;
-	} else if (total <= 1000) {
-		mod = 50;
-	} else {
-		mod = 100
-	}
-	if (total > 0) {
-		if (total % mod >= mod - 1){
-			textColor = 'red';
-		} else if (total % mod >= mod - 2) {
-			textColor = 'orange';
-		}
-	}
-	return textColor;	
+    let textColor = '';
+    if (total <= 50) {
+        mod = 10;
+    } else if (total <= 500) {
+        mod = 25;
+    } else if (total <= 1000) {
+        mod = 50;
+    } else {
+        mod = 100
+    }
+    if (total > 0) {
+        if (total % mod >= mod - 1) {
+            textColor = 'red';
+        } else if (total % mod >= mod - 2) {
+            textColor = 'orange';
+        }
+    }
+    return textColor;
 }
 
 
@@ -84,9 +84,9 @@ function countDownloads() {
         // The div we care about include a 'div.download_count'
         // IMPORTANT: The download_count div actually marks the number of prints
         const printsDiv = item.querySelector("div.download_count");
-		// Get the downloads div as the sibling of the prints div
-		const sibs = getSiblings(printsDiv);
-		if (!sibs || sibs.length > 1) continue;		
+        // Get the downloads div as the sibling of the prints div
+        const sibs = getSiblings(printsDiv);
+        if (!sibs || sibs.length > 1) continue;
         const downloadsDiv = sibs[0];
 
         // Find the <span> value for each
@@ -98,8 +98,8 @@ function countDownloads() {
         const numDownloads = strToNumber(downloadsStr);
         const total = numDownloads + numPrints * 2;
 
-		let textColor = getTotalValueColor(total);
-		// Insert our value next to the number of downloads.
+        let textColor = getTotalValueColor(total);
+        // Insert our value next to the number of downloads.
         const badgeDiv = document.createElement("div");
         badgeDiv.classList.add('mwcounter', 'portal-css-5h23f0');
         const badge = document.createElement("span");
