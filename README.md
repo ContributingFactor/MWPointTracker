@@ -1,9 +1,9 @@
 # MWPointTracker
 ![image](images/icon-128.png)
 
-MWPointTracker is a Chrome browser extension for MakerWorld creators that displays total points earned by each model on a maker's profile page. The formula used corresponds to NumberOfDownloads + NumberOfPrints * 2 and it's displayed on the web page next to the prints and download counters.
+MWPointTracker is a Chrome browser extension for MakerWorld creators that displays total of downloads and prints for each model on a maker's profile page. The formula used corresponds to NumberOfDownloads + NumberOfPrints * 2 and it's displayed on the web page next to the prints and download counters.
 
-When a model is two points away from the next point reward, the points total will be shown in orange. If it's one point away, it will be shown in red.
+When a model is two events away from the next point reward, the total will be shown in orange. If it's one event away, it will be shown in red.
 
 ![image](example.jpg)
 
