@@ -10,9 +10,11 @@ When a model is two points away from the next point reward, the points total wil
 ## Installation
 MWPointTracker is in active development and is not yet available in the Chrome web store. Currently it can only be used by downloading this repo's contents and installing it in Chrome as an Unpacked Extension.
 
-- Open `chrome://extensions/` in your browswer
+- Click the green `<> Code` button on this page and select `Download ZIP`.
+- Extract the downloaded zip file to your preferred location.
+- Open `chrome://extensions/` in your browser
 - On upper-right corner, enabled 'Developer Mode'
-- On the right side click the `Load unpacked` button. A file browser will open. Navigate the filesystem and select the mwpointtracker directory.
+- On the right side click the `Load unpacked` button. A file browser will open. Navigate the filesystem and select the mwpointtracker directory you extracted that contains the `manifest.json` file.
 
 ## Usage
 Once it's loaded, MWPointTracker will work automatically whenever you visit a profile page on MakerWorld.
