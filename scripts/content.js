@@ -106,7 +106,7 @@ function countDownloads() {
         if (textColor) {
             badge.style.cssText = `color:${textColor}`;
         }
-        badge.textContent = `P:${total}`
+        badge.textContent = `P: ${total}`
         printsDiv.insertAdjacentElement("afterend", badgeDiv);
         badgeDiv.insertAdjacentElement("beforeend", badge);
     }

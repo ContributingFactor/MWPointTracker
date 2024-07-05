@@ -14,7 +14,8 @@
     {
       "js": ["scripts/content.js"],
       "matches": [
-        "https://makerworld.com/en/*"
+        "https://makerworld.com/en/*",
+        "https://makerworld.com.cn/zh/*"
       ]
     }
   ]
