@@ -5,6 +5,10 @@ MWPointTracker is a Chrome browser extension for MakerWorld creators that displa
 
 When a model is two events away from the next point reward, the total will be shown in orange. If it's one event away, it will be shown in red.
 
+A progress bar is also added under the model statistics. The progress bar will show overall progress towards the next reward. If the mouse is held over the bar, the tooltip will show the number of current prints against the prints needed for the next reward.
+
+The progress bar can be turned on or off by using the extensions options.
+
 ![image](example.jpg)
 
 ## Installation
