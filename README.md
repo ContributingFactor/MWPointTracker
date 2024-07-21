@@ -12,7 +12,9 @@ The progress bar can be turned on or off by using the extensions options.
 ![image](example.jpg)
 
 ## Installation
-MWPointTracker is in active development and is not yet available in the Chrome web store. Currently it can only be used by downloading this repo's contents and installing it in Chrome as an Unpacked Extension.
+MWPointTracker is now available [in the Chrome web store](https://chromewebstore.google.com/detail/cgehmglfpdcjmgngacemcabihfplgkki).
+
+If you would rather install it from GitHub you can download this repo's contents and installing it in Chrome as an Unpacked Extension.
 
 - Click the green `<> Code` button on this page and select `Download ZIP`.
 - Extract the downloaded zip file to your preferred location.
