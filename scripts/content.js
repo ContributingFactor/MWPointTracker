@@ -125,10 +125,11 @@ function countDownloads() {
         // The div we care about include a 'div.download_count'
         // IMPORTANT: The download_count div actually marks the number of prints
         const printsDiv = item.querySelector("div.download_count");
-        // Get the downloads div as the sibling of the prints div
+        // Get the boosts div and downloads div as the sibling of the prints div
         const sibs = getSiblings(printsDiv);
-        if (!sibs || sibs.length > 1) continue;
-        const downloadsDiv = sibs[0];
+        if (!sibs || sibs.length > 2) continue;
+        // Prints is the sibling before the downloads
+        const downloadsDiv = sibs[sibs.length-1];
 
         // Find the <span> value for each
         const printsStr = printsDiv.querySelector("span").textContent;
@@ -155,7 +156,6 @@ function countDownloads() {
         // Add a progress bar that shows distance to next reward.
         // On mouse-over the tooltip will show:
         // current prints / next reward
-        console.log(`showProgressBar ${showProgressBar}`);
         if (showProgressBar) {
             const elem = item.querySelector('div.portal-css-1kap1iw');
             if (elem) {
