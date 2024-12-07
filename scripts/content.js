@@ -90,7 +90,7 @@ function getRewardInterval(total) {
 // make the text red. If we are 2 points away, make the
 // text orange.
 function getTotalValueColor(total) {
-    let textColor = '';
+    let textColor = '#898989';
     mod = getRewardInterval(total);
     if (total > 0) {
         if (total % mod >= mod - 1) {
@@ -144,30 +144,40 @@ function countDownloads() {
         let textColor = getTotalValueColor(total);
         // Insert our value next to the number of downloads.
         const badgeDiv = document.createElement("div");
-        badgeDiv.classList.add('mwcounter', 'portal-css-5h23f0');
+        badgeDiv.style.display='flex';
+        //badgeDiv.classList.add('mwcounter', 'portal-css-5h23f0');
         const badge = document.createElement("span");
         if (textColor) {
             badge.style.cssText = `color:${textColor}`;
         }
+        badge.style.fontWeight = '500';
+        badge.style.fontSize='12px';
+        badge.style.textWrapMode="nowrap"
+        badge.style.paddingRight='12px';
         badge.textContent = `P ${total}`
-        printsDiv.insertAdjacentElement("afterend", badgeDiv);
-        badgeDiv.insertAdjacentElement("beforeend", badge);
+
+        const elem = item.querySelector('div.portal-css-1kap1iw');
+        if (!elem) {
+            continue;
+        };
+
+        badgeDiv.insertAdjacentElement("beforeend", badge);    
+        elem.insertAdjacentElement("afterend", badgeDiv);
 
         // Add a progress bar that shows distance to next reward.
         // On mouse-over the tooltip will show:
         // current prints / next reward
         if (showProgressBar) {
-            const elem = item.querySelector('div.portal-css-1kap1iw');
-            if (elem) {
-                const prog = document.createElement('progress');
-                prog.value = `${total % getRewardInterval(total)}`;
-                prog.max = `${getRewardInterval(total)}`;
-                prog.style.accentColor = 'limeGreen';
-                prog.style.width = '100%';
-                prog.textContent = `${total}`
-                prog.setAttribute('title', `${total} / ${nextRewardPoints(total)}`);
-                elem.insertAdjacentElement("afterend", prog);
-            }
+            //const div = document.createElement("div");
+            
+            const prog = document.createElement('progress');
+            prog.value = `${total % getRewardInterval(total)}`;
+            prog.max = `${getRewardInterval(total)}`;
+            prog.style.accentColor = 'limeGreen';
+            prog.style.width = '100%';
+                    prog.textContent = `${total}`
+            prog.setAttribute('title', `${total} / ${nextRewardPoints(total)}`);
+            badgeDiv.insertAdjacentElement("beforeend", prog);
         }
     }
 }
