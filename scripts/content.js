@@ -118,7 +118,8 @@ function countDownloads() {
         if (!item) {
             continue;
         }
-        if (trackedUploads.includes(item.dataset.trackid)) {
+        if ((trackedUploads.includes(item.dataset.trackid)) 
+            || (document.getElementById(item.dataset.trackid))){
             continue;
         }
         trackedUploads.push(item.dataset.trackid);
@@ -144,6 +145,7 @@ function countDownloads() {
         let textColor = getTotalValueColor(total);
         // Insert our value next to the number of downloads.
         const badgeDiv = document.createElement("div");
+        badgeDiv.id = item.dataset.trackid;
         badgeDiv.style.display='flex';
         //badgeDiv.classList.add('mwcounter', 'portal-css-5h23f0');
         const badge = document.createElement("span");
