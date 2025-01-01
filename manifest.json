@@ -27,5 +27,10 @@
         "https://makerworld.com.cn/*"
       ]
     }
-  ]
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "mwtracker@slimyfrog.com"
+    }
+  }
 }

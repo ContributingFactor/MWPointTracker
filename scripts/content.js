@@ -1,12 +1,12 @@
 let list = document.querySelector('div.pageContent.MuiBox-root.mw-css-0');
 let trackedUploads = [];
 // Start undefined to force a read of the options.
-let showProgressBar = undefined;
+let showProgressBar = true;
 
 function readOptionsFromStorage() {
     chrome.storage.sync.get({ showProgressBar: true },
         (items) => {
-            if (items.showProgressBar){
+            if (items && items.showProgressBar){
                 showProgressBar = items.showProgressBar;
             }
         }
@@ -16,7 +16,9 @@ function readOptionsFromStorage() {
 function readOptionsAndCountDownloads() {
     chrome.storage.sync.get({ showProgressBar: true },
         (items) => {
-            showProgressBar = items.showProgressBar;
+            if (items){
+                showProgressBar = items.showProgressBar;
+            }
             countDownloads();
         }
     );
@@ -147,7 +149,6 @@ function countDownloads() {
         const badgeDiv = document.createElement("div");
         badgeDiv.id = item.dataset.trackid;
         badgeDiv.style.display='flex';
-        //badgeDiv.classList.add('mwcounter', 'mw-css-5h23f0');
         const badge = document.createElement("span");
         if (textColor) {
             badge.style.cssText = `color:${textColor}`;
@@ -170,8 +171,6 @@ function countDownloads() {
         // On mouse-over the tooltip will show:
         // current prints / next reward
         if (showProgressBar) {
-            //const div = document.createElement("div");
-            
             const prog = document.createElement('progress');
             prog.value = `${total % getRewardInterval(total)}`;
             prog.max = `${getRewardInterval(total)}`;
