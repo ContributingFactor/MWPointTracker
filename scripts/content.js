@@ -1,4 +1,4 @@
-let list = document.querySelector('div.pageContent.MuiBox-root.portal-css-0');
+let list = document.querySelector('div.pageContent.MuiBox-root.mw-css-0');
 let trackedUploads = [];
 // Start undefined to force a read of the options.
 let showProgressBar = undefined;
@@ -30,7 +30,7 @@ const observer = new MutationObserver(() => {
         readOptionsFromStorage();
         return;
     }
-    list = document.querySelector('div.pageContent.MuiBox-root.portal-css-0');
+    list = document.querySelector('div.pageContent.MuiBox-root.mw-css-0');
     if (list) {
         if (showProgressBar === undefined){
             readOptionsAndCountDownloads();
@@ -147,7 +147,7 @@ function countDownloads() {
         const badgeDiv = document.createElement("div");
         badgeDiv.id = item.dataset.trackid;
         badgeDiv.style.display='flex';
-        //badgeDiv.classList.add('mwcounter', 'portal-css-5h23f0');
+        //badgeDiv.classList.add('mwcounter', 'mw-css-5h23f0');
         const badge = document.createElement("span");
         if (textColor) {
             badge.style.cssText = `color:${textColor}`;
@@ -158,7 +158,7 @@ function countDownloads() {
         badge.style.paddingRight='12px';
         badge.textContent = `P ${total}`
 
-        const elem = item.querySelector('div.portal-css-1kap1iw');
+        const elem = item.querySelector('div.mw-css-1kap1iw');
         if (!elem) {
             continue;
         };
