@@ -33,7 +33,22 @@ const observer = new MutationObserver(() => {
         return;
     }
     list = document.querySelector('div.pageContent.MuiBox-root.mw-css-0');
-    if (list) {
+    if (!list) return;
+    const hasItems = list.querySelectorAll("[data-trackid$='_from_uploads']");
+    if (!hasItems || hasItems.length === 0) {
+        modelPageContent = document.querySelectorAll("span.mw-css-81vkv1");
+        if (modelPageContent && modelPageContent.length === 3){
+            const elem = document.querySelector('div.mw-css-pn2l0k');
+            if (!elem) {
+                return;
+            }
+            const trackId = document.querySelector('meta[property="og:title"]').content
+            if (document.getElementById(trackId)) {
+                return;
+            }
+            insertInformationBelowDiv(elem, modelPageContent[1].innerText, modelPageContent[2].innerText, trackId);
+        }
+    } else {
         if (showProgressBar === undefined){
             readOptionsAndCountDownloads();
         } else{
@@ -114,6 +129,41 @@ function nextRewardPoints(total) {
     return rv;
 }
 
+function insertInformationBelowDiv(elem, downloadsStr, printsStr, dataTrackId) {
+    const numPrints = strToNumber(printsStr);
+    const numDownloads = strToNumber(downloadsStr);
+    const total = numDownloads + numPrints * 2;
+    let textColor = getTotalValueColor(total);
+    const badgeDiv = document.createElement("div");
+    badgeDiv.id = dataTrackId;
+    badgeDiv.style.display='flex';
+    const badge = document.createElement("span");
+    if (textColor) {
+        badge.style.cssText = `color:${textColor}`;
+    }
+    badge.style.fontWeight = '500';
+    badge.style.fontSize='12px';
+    badge.style.textWrapMode="nowrap"
+    badge.style.paddingRight='12px';
+    badge.textContent = `P ${total}`
+    badgeDiv.insertAdjacentElement("beforeend", badge);    
+    elem.insertAdjacentElement("afterend", badgeDiv);
+
+    // Add a progress bar that shows distance to next reward.
+    // On mouse-over the tooltip will show:
+    // current prints / next reward
+    if (showProgressBar) {
+        const prog = document.createElement('progress');
+        prog.value = `${total % getRewardInterval(total)}`;
+        prog.max = `${getRewardInterval(total)}`;
+        prog.style.accentColor = 'limeGreen';
+        prog.style.width = '100%';
+                prog.textContent = `${total}`
+        prog.setAttribute('title', `${total} / ${nextRewardPoints(total)}`);
+        badgeDiv.insertAdjacentElement("beforeend", prog);
+    }
+}
+
 function countDownloads() {
     const items = list.querySelectorAll("[data-trackid$='_from_uploads']");
     for (item of items) {
@@ -140,45 +190,12 @@ function countDownloads() {
         if (!printsStr || !downloadsStr) {
             continue;
         }
-        const numPrints = strToNumber(printsStr);
-        const numDownloads = strToNumber(downloadsStr);
-        const total = numDownloads + numPrints * 2;
-
-        let textColor = getTotalValueColor(total);
-        // Insert our value next to the number of downloads.
-        const badgeDiv = document.createElement("div");
-        badgeDiv.id = item.dataset.trackid;
-        badgeDiv.style.display='flex';
-        const badge = document.createElement("span");
-        if (textColor) {
-            badge.style.cssText = `color:${textColor}`;
-        }
-        badge.style.fontWeight = '500';
-        badge.style.fontSize='12px';
-        badge.style.textWrapMode="nowrap"
-        badge.style.paddingRight='12px';
-        badge.textContent = `P ${total}`
 
         const elem = item.querySelector('div.mw-css-1kap1iw');
         if (!elem) {
             continue;
-        };
-
-        badgeDiv.insertAdjacentElement("beforeend", badge);    
-        elem.insertAdjacentElement("afterend", badgeDiv);
-
-        // Add a progress bar that shows distance to next reward.
-        // On mouse-over the tooltip will show:
-        // current prints / next reward
-        if (showProgressBar) {
-            const prog = document.createElement('progress');
-            prog.value = `${total % getRewardInterval(total)}`;
-            prog.max = `${getRewardInterval(total)}`;
-            prog.style.accentColor = 'limeGreen';
-            prog.style.width = '100%';
-                    prog.textContent = `${total}`
-            prog.setAttribute('title', `${total} / ${nextRewardPoints(total)}`);
-            badgeDiv.insertAdjacentElement("beforeend", prog);
         }
+
+        insertInformationBelowDiv(elem, downloadsStr, printsStr, item.dataset.trackid);
     }
 }
