@@ -166,7 +166,7 @@ function insertInformationBelowDiv(elem, downloadsStr, printsStr, dataTrackId) {
 
 function countDownloads() {
     const items = list.querySelectorAll("[data-trackid$='_from_uploads']");
-    for (item of items) {
+    for (const item of items) {
         if (!item) {
             continue;
         }
@@ -179,7 +179,11 @@ function countDownloads() {
         // IMPORTANT: The download_count div actually marks the number of prints
         const printsDiv = item.querySelector("div.download_count");
         // Get the boosts div and downloads div as the sibling of the prints div
-        const sibs = getSiblings(printsDiv);
+        let sibs = getSiblings(printsDiv);
+
+        // Filter clickable 'like' and other components added to the div
+        sibs = sibs.filter((s) => !s.className.includes("clickable"));
+        
         if (!sibs || sibs.length > 2) continue;
         // Prints is the sibling before the downloads
         const downloadsDiv = sibs[sibs.length-1];
