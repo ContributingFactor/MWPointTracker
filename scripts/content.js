@@ -195,7 +195,7 @@ function countDownloads() {
             continue;
         }
 
-        const elem = item.querySelector('div.mw-css-1kap1iw');
+        const elem = item.querySelector('div.mw-css-b84z3');
         if (!elem) {
             continue;
         }
