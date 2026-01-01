@@ -1,4 +1,5 @@
-let list = document.querySelector('div.pageContent.MuiBox-root.mw-css-0');
+const LIST_PARENT_STR = 'div.mw-css-1u39g9m';
+let list = document.querySelector(LIST_PARENT_STR);
 let trackedUploads = [];
 // Start undefined to force a read of the options.
 let showProgressBar = true;
@@ -32,9 +33,8 @@ const observer = new MutationObserver(() => {
         readOptionsFromStorage();
         return;
     }
-    list = document.querySelector('div.pageContent.MuiBox-root.mw-css-0');
-    if (!list) return;
-    const hasItems = list.querySelectorAll("[data-trackid$='_from_uploads']");
+    list = document.querySelector(LIST_PARENT_STR);
+    const hasItems = list && list.querySelectorAll("[data-trackid$='_from_uploads']");
     if (!hasItems || hasItems.length === 0) {
         modelPageContent = document.querySelectorAll("span.mw-css-81vkv1");
         if (modelPageContent && modelPageContent.length === 3){
@@ -165,6 +165,7 @@ function insertInformationBelowDiv(elem, downloadsStr, printsStr, dataTrackId) {
 }
 
 function countDownloads() {
+    if (!list) return;
     const items = list.querySelectorAll("[data-trackid$='_from_uploads']");
     for (const item of items) {
         if (!item) {
